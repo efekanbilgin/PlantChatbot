@@ -1,5 +1,5 @@
 """
-class_names.json'daki her tür için Wikipedia'dan veri çeker.
+Fetches Wikipedia data for each species in class_names.json.
 Outputs:
   - wikipedia_fetch_results.json
   - needs_review.json
@@ -26,7 +26,6 @@ session.headers.update({
 })
 
 
-
 MANUAL_OVERRIDES = {
     "Llex cornuta": "Ilex cornuta",
     "Malushalliana": "Malus halliana",
@@ -40,7 +39,6 @@ MANUAL_OVERRIDES = {
 }
 
 
-# Botanik otorite kısaltmaları
 AUTHORITY_PATTERN = re.compile(
     r"\s+(L\.?|Lamb\.?|Desr\.?|Presl\.?|Brongn\.?|Lindl\.?)$"
 )
@@ -74,7 +72,7 @@ def clean_name(raw_label: str) -> str:
 
 def wiki_get(params: dict) -> requests.Response:
     """
-    Wikipedia API'ye ortak Session üzerinden istek gönderir.
+    Sends a request to the Wikipedia API through the shared Session.
     """
 
     response = session.get(
@@ -88,7 +86,7 @@ def wiki_get(params: dict) -> requests.Response:
 
 def wiki_search_fallback(query: str) -> str | None:
     """
-    Wikipedia'da doğrudan sayfa bulunamazsa arama yapar.
+    Runs a search on Wikipedia when the direct page lookup fails.
     """
 
     response = wiki_get({
@@ -115,7 +113,7 @@ def wiki_search_fallback(query: str) -> str | None:
 
 def fetch_article(title: str) -> dict | None:
     """
-    Wikipedia makalesini çeker.
+    Fetches a Wikipedia article.
     """
 
     response = wiki_get({
@@ -150,7 +148,6 @@ def fetch_article(title: str) -> dict | None:
 
     if not lead:
         return None
-
 
     response_full = wiki_get({
         "action": "query",
@@ -202,7 +199,7 @@ def fetch_article(title: str) -> dict | None:
 
 def resolve_species(raw_label: str) -> dict:
     """
-    Bir sınıf etiketini Wikipedia makalesine eşleştirir.
+    Matches a class label to a Wikipedia article.
     """
 
     cleaned = clean_name(raw_label)
@@ -253,11 +250,10 @@ def main():
 
     results = []
 
-
     for label in labels:
 
         print(
-            f"\nWikipedia aranıyor: {label}"
+            f"\nSearching Wikipedia: {label}"
         )
 
         try:
@@ -269,7 +265,7 @@ def main():
         except requests.HTTPError as e:
 
             print(
-                f"❌ HTTP hatası: {label} -> {e}"
+                f"❌ HTTP error: {label} -> {e}"
             )
 
             result = {
@@ -282,7 +278,7 @@ def main():
         except requests.RequestException as e:
 
             print(
-                f"❌ Network hatası: {label} -> {e}"
+                f"❌ Network error: {label} -> {e}"
             )
 
             result = {
@@ -295,7 +291,7 @@ def main():
         except Exception as e:
 
             print(
-                f"❌ Beklenmeyen hata: {label} -> {e}"
+                f"❌ Unexpected error: {label} -> {e}"
             )
 
             result = {
@@ -370,12 +366,12 @@ def main():
 
     print(
         f"\n{exact_count}/{len(results)} "
-        f"tam eşleşti."
+        f"matched exactly."
     )
 
     print(
-        f"{len(needs_review)} tanesi "
-        f"kontrol gerektiriyor "
+        f"{len(needs_review)} entries "
+        f"need review "
         f"-> needs_review.json"
     )
 
