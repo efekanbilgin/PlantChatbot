@@ -1,5 +1,5 @@
 """
-Kullanım:
+Usage:
     pip install "psycopg[binary]"
     export POSTGRES_URL="postgresql://user:pass@host:5432/dbname"
     python load_wikipedia_to_postgres.py
@@ -16,10 +16,10 @@ POSTGRES_URL = os.environ.get(
 
 CREATE_TABLE_SQL = """
 CREATE TABLE IF NOT EXISTS plants (
-    species TEXT PRIMARY KEY,         
+    species TEXT PRIMARY KEY,
     wikipedia_url TEXT,
-    summary TEXT,                      
-    toxic_to_cats BOOLEAN,             
+    summary TEXT,
+    toxic_to_cats BOOLEAN,
     toxic_to_dogs BOOLEAN,
     toxicity_notes TEXT,
     toxicity_source TEXT,
@@ -53,7 +53,7 @@ def main():
             loaded, skipped = 0, 0
             for r in results:
                 if r["status"] == "NOT_FOUND" or not r.get("summary"):
-                    print(f"⏭  Atlandı (içerik yok): {r['label']}")
+                    print(f"⏭  Skipped (no content): {r['label']}")
                     skipped += 1
                     continue
 
@@ -63,7 +63,7 @@ def main():
 
         conn.commit()
 
-    print(f"\n{loaded} tür yüklendi, {skipped} tür atlandı.")
+    print(f"\n{loaded} species loaded, {skipped} species skipped.")
 
 
 if __name__ == "__main__":
