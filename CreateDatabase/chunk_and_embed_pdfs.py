@@ -15,7 +15,7 @@ from langchain_qdrant import QdrantVectorStore
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams
 
-PDF_ROOT = Path("PDFS")
+PDF_ROOT = Path("../PDFS")
 COLLECTION = "plant_article_chunks"
 QDRANT_URL = "http://localhost:6333"
 
