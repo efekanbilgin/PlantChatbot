@@ -16,7 +16,7 @@ from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams
 
 PDF_ROOT = Path("PDFS")
-COLLECTION = "plant_wikipedia_chunks"
+COLLECTION = "plant_article_chunks"
 QDRANT_URL = "http://localhost:6333"
 
 REFERENCES_PATTERN = re.compile(r"\n\s*(references|bibliography)\s*\n", re.IGNORECASE)
