@@ -15,7 +15,20 @@
     form.parentElement.appendChild(p);
   }
 
-  var observer = new MutationObserver(addRegisterLink);
+  function updateThinkingAvatar() {
+    var isGenerating = !!document.getElementById("stop-button");
+    var avatars = document.querySelectorAll('img[alt="Avatar for Plantlik"]');
+    avatars.forEach(function (img, idx) {
+      var isLast = idx === avatars.length - 1;
+      img.classList.toggle("plantlik-avatar-thinking", isGenerating && isLast);
+    });
+  }
+
+  var observer = new MutationObserver(function () {
+    addRegisterLink();
+    updateThinkingAvatar();
+  });
   observer.observe(document.body, { childList: true, subtree: true });
   addRegisterLink();
+  updateThinkingAvatar();
 })();
