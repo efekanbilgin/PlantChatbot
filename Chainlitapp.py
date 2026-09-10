@@ -167,6 +167,11 @@ async def on_chat_start():
     await cl.Message(content="Merhaba! 🌿 Başlamak için bir bitki fotoğrafı yükleyin.").send()
 
 
+@cl.on_chat_resume
+async def on_chat_resume(thread: cl.types.ThreadDict):
+    await get_agent()
+
+
 @cl.on_message
 async def on_message(message: cl.Message):
     agent = await get_agent()
