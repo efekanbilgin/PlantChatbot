@@ -11,7 +11,7 @@
     p.style.marginTop = "1rem";
     p.style.fontSize = "0.875rem";
     p.style.textAlign = "center";
-    p.innerHTML = 'Hesabın yok mu? <a href="/register" style="color:#ec1561;">Kayıt ol</a>';
+    p.innerHTML = 'Hesabın yok mu? <a href="/register" style="color:#c98a4f;">Kayıt ol</a>';
     form.parentElement.appendChild(p);
   }
 

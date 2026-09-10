@@ -50,47 +50,89 @@ REGISTER_PAGE_TEMPLATE = """
 <html lang="tr">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kayıt Ol -- Plantlik</title>
 <style>
+  :root {{
+    --pl-bg: #11150f;
+    --pl-paper: #1a2016;
+    --pl-border: #2c3324;
+    --pl-text: #ece6d8;
+    --pl-text-secondary: #a6a08c;
+    --pl-primary: #a9682f;
+    --pl-primary-light: #c98a4f;
+    --pl-primary-dark: #7c4a1e;
+    --pl-error-bg: #3a2116;
+    --pl-error-text: #e8a97a;
+    --pl-success-bg: #1c2c17;
+    --pl-success-text: #9fd18a;
+  }}
+  * {{ box-sizing: border-box; }}
   body {{
-    background: #0e0e10; color: #e6e6e6; font-family: system-ui, sans-serif;
+    background: var(--pl-bg); color: var(--pl-text);
+    font-family: system-ui, -apple-system, sans-serif;
     display: flex; align-items: center; justify-content: center;
-    min-height: 100vh; margin: 0;
+    min-height: 100vh; margin: 0; padding: 1.5rem;
   }}
   .card {{
-    background: #17171a; padding: 2.5rem; border-radius: 12px;
-    width: 320px; box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    background: var(--pl-paper); border: 1px solid var(--pl-border);
+    padding: 2.5rem; border-radius: 16px;
+    width: 100%; max-width: 340px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
   }}
-  h1 {{ font-size: 1.3rem; margin: 0 0 1.5rem; }}
-  label {{ display: block; font-size: 0.85rem; margin-bottom: 0.3rem; color: #b3b3b3; }}
+  .logo {{
+    display: block; width: 64px; height: 64px; border-radius: 14px;
+    margin: 0 auto 1.25rem; object-fit: cover;
+  }}
+  h1 {{
+    font-size: 1.25rem; margin: 0 0 1.5rem; text-align: center; font-weight: 600;
+  }}
+  label {{
+    display: block; font-size: 0.85rem; margin-bottom: 0.35rem;
+    color: var(--pl-text-secondary);
+  }}
   input {{
-    width: 100%; box-sizing: border-box; padding: 0.6rem 0.75rem; margin-bottom: 1rem;
-    border-radius: 8px; border: 1px solid #333; background: #0e0e10; color: #e6e6e6;
+    width: 100%; padding: 0.65rem 0.8rem; margin-bottom: 1.1rem;
+    border-radius: 8px; border: 1px solid var(--pl-border);
+    background: var(--pl-bg); color: var(--pl-text); font-size: 0.95rem;
+    transition: border-color 0.15s ease;
+  }}
+  input:focus {{
+    outline: none; border-color: var(--pl-primary);
   }}
   button {{
-    width: 100%; padding: 0.7rem; border: none; border-radius: 8px;
-    background: #ec1561; color: white; font-weight: 600; cursor: pointer;
+    width: 100%; padding: 0.75rem; border: none; border-radius: 8px;
+    background: var(--pl-primary); color: #fff; font-weight: 600;
+    font-size: 0.95rem; cursor: pointer; transition: background 0.15s ease;
   }}
-  .msg {{ margin-bottom: 1rem; padding: 0.6rem 0.8rem; border-radius: 8px; font-size: 0.9rem; }}
-  .msg.error {{ background: #3a1620; color: #ff8fa3; }}
-  .msg.success {{ background: #14331f; color: #7ee2a8; }}
-  a {{ color: #ec1561; }}
+  button:hover {{ background: var(--pl-primary-light); }}
+  .msg {{
+    margin-bottom: 1.1rem; padding: 0.65rem 0.85rem; border-radius: 8px;
+    font-size: 0.88rem; line-height: 1.4;
+  }}
+  .msg.error {{ background: var(--pl-error-bg); color: var(--pl-error-text); }}
+  .msg.success {{ background: var(--pl-success-bg); color: var(--pl-success-text); }}
+  .footer-link {{
+    margin-top: 1.4rem; font-size: 0.85rem; text-align: center;
+    color: var(--pl-text-secondary);
+  }}
+  a {{ color: var(--pl-primary-light); text-decoration: none; }}
+  a:hover {{ text-decoration: underline; }}
 </style>
 </head>
 <body>
   <div class="card">
+    <img class="logo" src="/public/logo.png" alt="Plantlik">
     <h1>Plantlik'e Kayıt Ol</h1>
     {message_html}
     <form method="post" action="/register">
       <label for="username">Kullanıcı adı</label>
-      <input id="username" name="username" type="text" required minlength="3" value="{username_value}">
+      <input id="username" name="username" type="text" required minlength="3" value="{username_value}" autofocus>
       <label for="password">Şifre</label>
       <input id="password" name="password" type="password" required minlength="6">
       <button type="submit">Kayıt Ol</button>
     </form>
-    <p style="margin-top:1.2rem; font-size:0.85rem;">
-      Zaten hesabın var mı? <a href="/">Giriş yap</a>
-    </p>
+    <p class="footer-link">Zaten hesabın var mı? <a href="/">Giriş yap</a></p>
   </div>
 </body>
 </html>

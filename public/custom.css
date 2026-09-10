@@ -1,0 +1,55 @@
+:root {
+  --background: 43 45% 92% !important;
+  --foreground: 39 24% 11% !important;
+  --card: 43 58% 95% !important;
+  --card-foreground: 39 24% 11% !important;
+  --popover: 43 58% 95% !important;
+  --popover-foreground: 39 24% 11% !important;
+  --primary: 30 52% 35% !important;
+  --primary-foreground: 0 0% 100% !important;
+  --secondary: 42 39% 86% !important;
+  --secondary-foreground: 39 24% 11% !important;
+  --muted: 42 39% 86% !important;
+  --muted-foreground: 36 13% 37% !important;
+  --accent: 44 39% 83% !important;
+  --accent-foreground: 39 24% 11% !important;
+  --border: 42 35% 79% !important;
+  --input: 42 35% 79% !important;
+  --ring: 30 52% 35% !important;
+  --sidebar-background: 42 42% 89% !important;
+  --sidebar-foreground: 39 24% 11% !important;
+  --sidebar-primary: 30 52% 35% !important;
+  --sidebar-primary-foreground: 0 0% 100% !important;
+  --sidebar-accent: 44 39% 83% !important;
+  --sidebar-accent-foreground: 39 24% 11% !important;
+  --sidebar-border: 42 35% 79% !important;
+  --sidebar-ring: 30 52% 35% !important;
+}
+
+.dark {
+  --background: 100 17% 7% !important;
+  --foreground: 42 34% 89% !important;
+  --card: 96 19% 11% !important;
+  --card-foreground: 42 34% 89% !important;
+  --popover: 96 19% 11% !important;
+  --popover-foreground: 42 34% 89% !important;
+  --primary: 28 56% 42% !important;
+  --primary-foreground: 0 0% 100% !important;
+  --secondary: 94 19% 14% !important;
+  --secondary-foreground: 42 34% 89% !important;
+  --muted: 94 19% 14% !important;
+  --muted-foreground: 46 13% 60% !important;
+  --accent: 88 17% 17% !important;
+  --accent-foreground: 42 34% 89% !important;
+  --border: 88 17% 17% !important;
+  --input: 88 17% 17% !important;
+  --ring: 28 56% 42% !important;
+  --sidebar-background: 96 20% 5% !important;
+  --sidebar-foreground: 42 34% 89% !important;
+  --sidebar-primary: 28 56% 42% !important;
+  --sidebar-primary-foreground: 0 0% 100% !important;
+  --sidebar-accent: 88 17% 17% !important;
+  --sidebar-accent-foreground: 42 34% 89% !important;
+  --sidebar-border: 88 17% 17% !important;
+  --sidebar-ring: 28 56% 42% !important;
+}
