@@ -2,7 +2,8 @@ CREATE TABLE users (
     "id" UUID PRIMARY KEY,
     "identifier" TEXT NOT NULL UNIQUE,
     "metadata" JSONB NOT NULL,
-    "createdAt" TEXT
+    "createdAt" TEXT,
+    "password_hash" TEXT
 );
 
 CREATE TABLE IF NOT EXISTS threads (
@@ -36,6 +37,8 @@ CREATE TABLE IF NOT EXISTS steps (
     "showInput" TEXT,
     "language" TEXT,
     "indent" INT,
+    "defaultOpen" BOOLEAN,
+    "autoCollapse" BOOLEAN,
     FOREIGN KEY ("threadId") REFERENCES threads("id") ON DELETE CASCADE
 );
 

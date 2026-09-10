@@ -319,10 +319,6 @@ class PlantLangGraph:
 
     @staticmethod
     def _grounded_query(query: str, species: str) -> str:
-        # Follow-up questions often drop the subject entirely (e.g. "neden
-        # alerjiye neden olur?" instead of "Cedrus deodara neden alerjiye
-        # neden olur?"). Prepending the species name grounds the embedding
-        # so retrieval doesn't silently fail on pronoun-free follow-ups.
         return f"{species}: {query}"
 
     @staticmethod
@@ -340,9 +336,6 @@ class PlantLangGraph:
 
     @staticmethod
     def _qdrant_species_key(species: str) -> str:
-        # The classifier/Postgres use space-separated species names (e.g.
-        # "Pinus massoniana Lamb"), but the Qdrant article-chunk metadata was
-        # ingested with underscore-joined names (e.g. "Pinus_massoniana_Lamb").
         return re.sub(r"\s+", "_", species.strip())
 
     @staticmethod
@@ -362,10 +355,6 @@ class PlantLangGraph:
         return bool(await self.get_confirmed_species(thread_id))
 
     async def get_confirmed_species(self, thread_id: str) -> str | None:
-        """The identified species, but only once confidence cleared the
-        threshold. A low-confidence guess (still awaiting a clearer photo
-        from the user) does not count -- otherwise the user would be unable
-        to upload a retry photo in the same chat."""
         config = {"configurable": {"thread_id": thread_id}}
         snapshot = await self.graph.aget_state(config)
         values = snapshot.values
